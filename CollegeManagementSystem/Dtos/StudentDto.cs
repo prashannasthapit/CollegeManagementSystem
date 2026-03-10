@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CollegeManagementSystem.Models;
+namespace CollegeManagementSystem.Dtos;
 
-public class Student
+public class StudentDto
 {
     [Required] public string Id { get; set; } = null!;
 

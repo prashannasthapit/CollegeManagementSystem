@@ -1,4 +1,5 @@
-using CollegeManagementSystem.Models;
+using CollegeManagementSystem.Data;
+using CollegeManagementSystem.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollegeManagementSystem.Controllers;
@@ -7,45 +8,43 @@ namespace CollegeManagementSystem.Controllers;
 [Route("api/[controller]")]
 public class StudentController : ControllerBase
 {
-    private static readonly List<Student> Students = [];
-
     [HttpGet("getAll")]
-    public ActionResult<List<Student>> GetStudents() => Students;
+    public ActionResult<List<StudentDto>> GetStudents() => StudentData.Students;
 
     [HttpGet("{id}")]
-    public ActionResult<Student> GetStudent(string id)
+    public ActionResult<StudentDto> GetStudent(string id)
     {
-        var student = Students.FirstOrDefault(s => s.Id == id);
+        var student = StudentData.Students.FirstOrDefault(s => s.Id == id);
         if (student == null) return NotFound();
         return student;
     }
 
     [HttpPost("add")]
-    public ActionResult AddStudent(Student student)
+    public ActionResult AddStudent(StudentDto studentDto)
     {
-        if (Students.Any(s => s.Id == student.Id))
+        if (StudentData.Students.Any(s => s.Id == studentDto.Id))
             return BadRequest("Student with this ID already exists.");
-        Students.Add(student);
-        return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
+        StudentData.Students.Add(studentDto);
+        return CreatedAtAction(nameof(GetStudent), new { id = studentDto.Id }, studentDto);
     }
 
     [HttpPut("update/{id}")]
-    public ActionResult UpdateStudent(string id, Student updatedStudent)
+    public ActionResult UpdateStudent(string id, StudentDto updatedStudentDto)
     {
-        var student = Students.FirstOrDefault(s => s.Id == id);
+        var student = StudentData.Students.FirstOrDefault(s => s.Id == id);
         if (student == null) return NotFound();
-        student.Name = updatedStudent.Name;
-        student.Age = updatedStudent.Age;
-        student.Course = updatedStudent.Course;
+        student.Name = updatedStudentDto.Name;
+        student.Age = updatedStudentDto.Age;
+        student.Course = updatedStudentDto.Course;
         return NoContent();
     }
 
     [HttpDelete("delete/{id}")]
     public ActionResult DeleteStudent(string id)
     {
-        var student = Students.FirstOrDefault(s => s.Id == id);
+        var student = StudentData.Students.FirstOrDefault(s => s.Id == id);
         if (student == null) return NotFound();
-        Students.Remove(student);
+        StudentData.Students.Remove(student);
         return NoContent();
     }
 }
