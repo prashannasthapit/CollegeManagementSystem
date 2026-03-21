@@ -4,7 +4,7 @@ namespace CollegeManagementSystem.Dtos;
 
 public class StudentDto
 {
-    [Required] public string Id { get; set; } = null!;
+    public required string Id { get; init; }
 
     [Required]
     [StringLength(100, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 100 characters.")]

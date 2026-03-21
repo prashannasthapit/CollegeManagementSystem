@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CollegeManagementSystem.Data.Entities;
 
-public class Student
+public class Instructor
 {
     [Key]
     public int Id { get; set; }
@@ -15,15 +15,12 @@ public class Student
     [StringLength(100)]
     public string LastName { get; set; } = null!;
 
-    public DateTime DateOfBirth { get; set; }
-
-    [StringLength(20)]
-    public string Phone { get; set; } = null!;
-
     [Required]
     [EmailAddress]
     [StringLength(256)]
     public string Email { get; set; } = null!;
 
-    public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+    public DateTime HireDate { get; set; }
+
+    public ICollection<ModuleInstructor> ModuleInstructors { get; set; } = new List<ModuleInstructor>();
 }
