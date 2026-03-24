@@ -5,7 +5,7 @@ namespace CollegeManagementSystem.Data.Entities;
 public class Student
 {
     [Key]
-    public int Id { get; set; }
+    public string Id { get; set; } = null!;
 
     [Required]
     [StringLength(100)]

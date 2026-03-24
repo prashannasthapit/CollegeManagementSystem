@@ -45,8 +45,8 @@ namespace CollegeManagementSystem.Migrations
 
             modelBuilder.Entity("CollegeManagementSystem.Data.Entities.Enrollment", b =>
                 {
-                    b.Property<int>("StudentId")
-                        .HasColumnType("integer");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("text");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
@@ -135,11 +135,8 @@ namespace CollegeManagementSystem.Migrations
 
             modelBuilder.Entity("CollegeManagementSystem.Data.Entities.Student", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
@@ -193,7 +190,7 @@ namespace CollegeManagementSystem.Migrations
                     b.HasOne("CollegeManagementSystem.Data.Entities.Course", "Course")
                         .WithMany("Modules")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Course");

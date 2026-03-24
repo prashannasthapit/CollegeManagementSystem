@@ -2,7 +2,7 @@ namespace CollegeManagementSystem.Data.Entities;
 
 public class Enrollment
 {
-    public int StudentId { get; set; }
+    public string StudentId { get; set; } = null!;
     public Student Student { get; set; } = null!;
 
     public int CourseId { get; set; }
