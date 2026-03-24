@@ -39,6 +39,12 @@ if (app.Environment.IsDevelopment())
     {
         options.Title = "My API";
     });
+
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "My API V1");
+        // options.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
+    });
 }
 
 app.UseHttpsRedirection();
